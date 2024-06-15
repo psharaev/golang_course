@@ -2,15 +2,15 @@ package main
 
 import (
 	"bytes"
-	"io/ioutil"
+	"io"
 	"testing"
 )
 
 // запускаем перед основными функциями по разу чтобы файл остался в памяти в файловом кеше
 // ioutil.Discard - это ioutil.Writer который никуда не пишет
 func init() {
-	SlowSearch(ioutil.Discard)
-	FastSearch(ioutil.Discard)
+	SlowSearch(io.Discard)
+	FastSearch(io.Discard)
 }
 
 // -----
@@ -35,12 +35,12 @@ func TestSearch(t *testing.T) {
 
 func BenchmarkSlow(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		SlowSearch(ioutil.Discard)
+		SlowSearch(io.Discard)
 	}
 }
 
 func BenchmarkFast(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		FastSearch(ioutil.Discard)
+		FastSearch(io.Discard)
 	}
 }
